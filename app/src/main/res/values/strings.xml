@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">FYP</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_watchlist">watchlist</string>
+    <string name="title_activity_watching">watching</string>
+    <string name="title_activity_finished">finished</string>
+    <string name="title_activity_bottom_navigation">bottomNavigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="array_film">
+        <item>Iron Man</item>
+        <item>The incredible Hulk</item>
+        <item>Iron Man 2</item>
+        <item>Thor</item>
+        <item>Captain America: The First Avenger</item>
+        <item>Marvels The Avengers</item>
+        <item>Iron Man 3</item>
+        <item>Thor: The Dark World</item>
+        <item>Guardians of the Galaxy</item>
+        <item>Avengers: Age of Ultron</item>
+        <item>Ant-Man</item>
+        <item>Captain America: Civil War</item>
+        <item>Doctor Strange</item>
+        <item>Guardians of the Galaxy Vol. 2</item>
+        <item>Spider-Man: Homecoming</item>
+        <item>Thor: Ragnarok</item>
+        <item>Black Panther</item>
+        <item>Avengers: Infinity War</item>
+        <item>Ant-Man and the Wasp</item>
+        <item>Captain Marvel</item>
+    </string-array>
+    <string name="title_activity_search">searchActivity</string>
+</resources>
