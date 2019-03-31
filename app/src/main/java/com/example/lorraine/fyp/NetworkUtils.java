@@ -13,14 +13,15 @@ import java.util.Scanner;
 
 public class NetworkUtils
 {
-    private static final String TAG = "com.example.lorraine.fyp.NetworkUtils";
-    private final static String OMDB_URL = "http://www.omdbapi.com/ ";
+    private static final String TAG = "NetworkUtils";
+    private final static String OMDB_URL = "http://www.omdbapi.com/?t=Avengers";
            // "?apikey=[yourkey]&";
     private final static String API_KEY = "822594fa";
-    private final static String PARAM_API_KEY = "?apikey=[yourkey]&";
-    private static URL buildUrlForFilm()
+    private final static String PARAM_API_KEY = "?apikey=[" + API_KEY + "]&";
+
+    public static URL buildUrlForOmdb()
     {
-        Uri buiitUri = Uri.parse(OMDB_URL).buildUpon()
+        Uri builtUri = Uri.parse(OMDB_URL).buildUpon()
             .appendQueryParameter(PARAM_API_KEY, API_KEY)
                 .build();
 
@@ -35,7 +36,7 @@ public class NetworkUtils
             e.printStackTrace();
         }
         Log.i(TAG, "buildUrlForFilm: url:"+url);
-        return url
+        return url;
     }
 
     public static String getResponseFromHttpUrl(URL url) throws IOException
