@@ -24,6 +24,7 @@ public class finished extends AppCompatActivity
     private Button watching;
     private Button settings;
     private Button searchA;
+    private Button mainActivity;
 
 
     ArrayAdapter<String> adapter;
@@ -99,6 +100,17 @@ public class finished extends AppCompatActivity
             }
         });
 
+        mainActivity= (Button) findViewById(R.id.mainActivity);
+        mainActivity.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                openmainActivity();
+            }
+        });
+
+
     }
 
     public void openwatchlist()
@@ -130,9 +142,14 @@ public class finished extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void openmainActivity()
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     /*
     * Section for the search bar functionality
-    * inc. listene
+    * inc. listener
     * */
 
     @Override
