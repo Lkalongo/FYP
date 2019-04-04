@@ -1,3 +1,4 @@
+/*
 package com.example.lorraine.fyp;
 
 import android.os.AsyncTask;
@@ -81,4 +82,4 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
             urlConnection.disconnect();
         }
     }
-}
+}*/

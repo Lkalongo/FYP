@@ -3,11 +3,18 @@ package com.example.lorraine.fyp;
 //data modelling class
 public class Film
 {
-    String time;
+    String title;
     String year;
+    String type;
+    String poster;
 
-    public void setTime(String time) {
-        this.time = time;
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public void setTitle(String name) {
+        this.title = title;
     }
 
     public void setYear(String year) {
@@ -18,11 +25,9 @@ public class Film
         this.type = type;
     }
 
-    String type;
-
-    public String getTime ()
+    public String getTitle ()
     {
-        return time;
+        return title;
     }
 
     public String getYear()
@@ -34,5 +39,8 @@ public class Film
     {
         return type;
     }
+
+    public String getPoster() {
+        return poster;}
 
 }

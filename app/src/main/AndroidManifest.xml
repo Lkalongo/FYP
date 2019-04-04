@@ -45,7 +45,13 @@
         <activity
             android:name=".watching"
             android:label="@string/title_activity_watching"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".MainActivity"
+            android:label="MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
 
     </application>
 

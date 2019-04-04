@@ -14,15 +14,16 @@ import java.util.Scanner;
 public class NetworkUtils
 {
     private static final String TAG = "NetworkUtils";
-    private final static String OMDB_URL = "http://www.omdbapi.com/?t=Avengers";
-           // "?apikey=[yourkey]&";
+    private final static String OMDB_BASE_URL = "http://www.omdbapi.com/?s=Avengers";
+
     private final static String API_KEY = "822594fa";
-    private final static String PARAM_API_KEY = "?apikey=[" + API_KEY + "]&";
+    private final static String PARAM_API_KEY = "apikey" ;
 
     public static URL buildUrlForOmdb()
     {
-        Uri builtUri = Uri.parse(OMDB_URL).buildUpon()
+        Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
             .appendQueryParameter(PARAM_API_KEY, API_KEY)
+                //.appendQueryParameter(scanner string here)
                 .build();
 
         URL url = null;
@@ -35,7 +36,7 @@ public class NetworkUtils
         {
             e.printStackTrace();
         }
-        Log.i(TAG, "buildUrlForFilm: url:"+url);
+        Log.i(TAG, "buildUrlForOmdb: url:"+ url);
         return url;
     }
 
