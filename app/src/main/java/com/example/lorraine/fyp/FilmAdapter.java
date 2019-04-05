@@ -32,12 +32,12 @@ public class FilmAdapter extends ArrayAdapter<Film>
 
         //context = convertView.getContext();
 
-        TextView  titleTextView = convertView.findViewById(R.id.fTitle);
+        TextView  nameTextView = convertView.findViewById(R.id.fName);
         TextView  yearTextView = convertView.findViewById(R.id.fYear);
         TextView  typeTextView = convertView.findViewById(R.id.fType);
         TextView  posterTextView = convertView.findViewById(R.id.fPoster);
 
-        titleTextView.setText(film.getTitle());
+        nameTextView.setText(film.getName());
         yearTextView.setText(film.getYear());
         typeTextView.setText(film.getType());
         posterTextView.setText(film.getPoster());

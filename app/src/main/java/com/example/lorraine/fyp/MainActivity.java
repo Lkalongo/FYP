@@ -69,9 +69,20 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String omdbSearchResults)
         {
-            if(omdbSearchResults != null && omdbSearchResults.equals(""))
+            if(omdbSearchResults != null && !omdbSearchResults.equals(""))
             {
                 filmArrayList = parseJSON(omdbSearchResults);
+
+                //for the purpose of testing
+               /* Iterator itr = filmArrayList.iterator();
+                while(itr.hasNext())
+                {
+                    Film filmInIterator = (Film) itr.next();
+                    Log.i(TAG, "onPostExecute: name:" + filmInIterator.getName()+
+                                    "year:" + filmInIterator.getYear() +
+                                    "type:" + filmInIterator.getName() +
+                                    "poster:" + filmInIterator.getPoster());
+                }*/
 
             }
 
@@ -99,10 +110,10 @@ public class MainActivity extends AppCompatActivity
                    JSONObject resultsObj = results.getJSONObject(i);
 
                    //For name of the film
-                   String title = resultsObj.getString("title");
-                   film.setTitle(title);
+                   String name = resultsObj.getString("name");
+                   film.setName(name);
 
-                   Log.i(TAG, "parseJSON: title: " + title);
+                   Log.i(TAG, "parseJSON: name: " + name);
 
                     //For year film was released
                    String year = resultsObj.getString("year");
@@ -120,9 +131,9 @@ public class MainActivity extends AppCompatActivity
                    String poster = resultsObj.getString("poster");
                    film.setPoster(poster);
 
-                   Log.i(TAG, "parseJSON: title:" + title + " "+
+                  /* Log.i(TAG, "parseJSON: name:" + name + " "+
                            "year: " + year + "" +
-                           "type: " + type);
+                           "type: " + type);*/
 
                    filmArrayList.add(film);
 
@@ -131,6 +142,7 @@ public class MainActivity extends AppCompatActivity
                if(filmArrayList !=null)
                {
                    FilmAdapter filmAdapter = new FilmAdapter(this, filmArrayList);
+                   listView.setAdapter(filmAdapter);
                }
 
                return filmArrayList;
@@ -139,11 +151,6 @@ public class MainActivity extends AppCompatActivity
            {
                e.printStackTrace();
            }
-           /*catch (IOException e)
-           {
-               e.printStackTrace();
-           }*/
-
         }
         return null;
     }
