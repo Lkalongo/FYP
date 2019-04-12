@@ -100,7 +100,7 @@ public class finished extends AppCompatActivity
             }
         });
 
-        mainActivity= (Button) findViewById(R.id.mainActivity);
+       /* mainActivity= (Button) findViewById(R.id.mainActivity);
         mainActivity.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -108,7 +108,7 @@ public class finished extends AppCompatActivity
             {
                 openmainActivity();
             }
-        });
+        });*/
 
 
     }
@@ -142,7 +142,7 @@ public class finished extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void openmainActivity()
+   /* public void openmainActivity()
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -153,13 +153,15 @@ public class finished extends AppCompatActivity
     * */
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menuSearch);
         SearchView searchView = (SearchView)item.getActionView();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
 
             @Override
             public boolean onQueryTextSubmit(String query) {

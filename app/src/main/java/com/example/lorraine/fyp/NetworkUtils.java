@@ -1,22 +1,103 @@
-package com.example.lorraine.fyp;//package com.example.lorraine.fyp;
+package com.example.lorraine.fyp;
 
 import android.net.Uri;
 import android.nfc.Tag;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+import static android.content.ContentValues.TAG;
+
 public class NetworkUtils
 {
-    private static final String TAG = "NetworkUtils";
-    private final static String OMDB_BASE_URL = "http://www.omdbapi.com/?s=Avengers";
+    private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
+    //Base URL for API
+    private final static String OMDB_BASE_URL = "http://www.omdbapi.com/?s=";
+    //private final static String QUERY_PARAM = "q";
+    //private final static String API_KEY = "822594fa";
+    private final static String PARAM_API_KEY = "apikey=822594fa";
 
-    private final static String API_KEY = "822594fa";
+
+    static String getFilmInfo (String queryString)
+    {
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader = null;
+        String filmJSONString = null;
+       // return filmJSONString;
+
+        try
+        {
+            Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
+                    // .appendQueryParameter(PARAM_API_KEY)
+                    .appendQueryParameter(queryString, PARAM_API_KEY)
+
+                    .build();
+
+            URL requestURL = new URL(builtUri.toString());
+
+            urlConnection = (HttpURLConnection) requestURL.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            //used to read response using inputStream and a StringBuffer then convert to a String
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
+            if(inputStream == null)
+            {
+                return null;
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while((line = reader.readLine()) !=null)
+            {
+                buffer.append(line + "\n");
+            }
+            if(buffer.length() == 0)
+            {
+                //stream empty so do not parse
+                return null;
+            }
+            filmJSONString = buffer.toString();
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+            return null;
+        }
+        finally
+        {
+            if(urlConnection !=null)
+            {
+                urlConnection.disconnect();
+            }
+            if(reader !=null)
+            {
+                try
+                {
+                    reader.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            Log.i(LOG_TAG, filmJSONString);
+            return filmJSONString;
+        }
+
+
+
+    }
+
+
+   /* private final static String API_KEY = "822594fa";
     private final static String PARAM_API_KEY = "apikey" ;
 
     public static URL buildUrlForOmdb()
@@ -65,5 +146,5 @@ public class NetworkUtils
         {
             urlConnection.disconnect();
         }
-    }
+    }*/
 }

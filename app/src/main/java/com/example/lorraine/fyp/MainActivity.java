@@ -1,3 +1,4 @@
+/*
 package com.example.lorraine.fyp;
 
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import java.net.URL;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.jar.Attributes;
 
 
 public class MainActivity extends AppCompatActivity
@@ -72,20 +74,7 @@ public class MainActivity extends AppCompatActivity
             if(omdbSearchResults != null && !omdbSearchResults.equals(""))
             {
                 filmArrayList = parseJSON(omdbSearchResults);
-
-                //for the purpose of testing
-               /* Iterator itr = filmArrayList.iterator();
-                while(itr.hasNext())
-                {
-                    Film filmInIterator = (Film) itr.next();
-                    Log.i(TAG, "onPostExecute: name:" + filmInIterator.getName()+
-                                    "year:" + filmInIterator.getYear() +
-                                    "type:" + filmInIterator.getName() +
-                                    "poster:" + filmInIterator.getPoster());
-                }*/
-
             }
-
             super.onPostExecute(omdbSearchResults);
         }
     }
@@ -100,14 +89,19 @@ public class MainActivity extends AppCompatActivity
         {
            try
            {
-               JSONObject rootObject = new JSONObject(omdbSearchResults);
-               JSONArray results = rootObject.getJSONArray("FilmDetails");
+               //doesnt like the line below
+               JSONObject jsonObject = new JSONObject(omdbSearchResults);
+               JSONArray resultsArray = jsonObject.getJSONArray("FilmDetails");
 
-               for(int i = 0; i<results.length(); i++)
+               for(int i = 0; i<resultsArray.length(); i++)
                {
                    Film film = new Film();
 
-                   JSONObject resultsObj = results.getJSONObject(i);
+                   JSONObject resultsObj = resultsArray.getJSONObject(i);
+
+                   //basically just another way of writing it the other way
+                   //film.setName(resultsObj.getString("Name"));
+
 
                    //For name of the film
                    String name = resultsObj.getString("name");
@@ -131,9 +125,11 @@ public class MainActivity extends AppCompatActivity
                    String poster = resultsObj.getString("poster");
                    film.setPoster(poster);
 
-                  /* Log.i(TAG, "parseJSON: name:" + name + " "+
+                  */
+/* Log.i(TAG, "parseJSON: name:" + name + " "+
                            "year: " + year + "" +
-                           "type: " + type);*/
+                           "type: " + type);*//*
+
 
                    filmArrayList.add(film);
 
@@ -155,3 +151,4 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 }
+*/

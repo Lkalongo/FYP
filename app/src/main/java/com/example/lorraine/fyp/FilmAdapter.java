@@ -1,3 +1,4 @@
+/*
 package com.example.lorraine.fyp;
 
 import android.content.Context;
@@ -47,3 +48,4 @@ public class FilmAdapter extends ArrayAdapter<Film>
 
 
 }
+*/

@@ -1,11 +1,11 @@
-/*
+
 package com.example.lorraine.fyp;
 
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,20 +15,33 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class fetchData extends AsyncTask<Void, Void, Void> {
+public class fetchData extends AsyncTask<String, Void, String>
+{
+    private TextView nYearText;
+    private TextView nTypeText;
+
+    public fetchData (TextView nYearText, TextView nTypeText)
+    {
+        this.nYearText = nYearText;
+        this.nTypeText = nTypeText;
+    }
+
     //JSON file - used to hold the data from JSON
-    String data = "";
+    /*String data = "";
     String dataParsed = "";
     String singleParsed = "";
-
+    String filmTitle = "avengers";*/
 
     //background thread
     @Override
-    protected Void doInBackground(Void... voids) {
-        try {
-            //data is collected from this URL only - needs to be explanadble
-            URL url = new URL("http://www.omdbapi.com/?s=avengers&apikey=822594fa");
+    protected String doInBackground(String... strings)
+    {
+        /*try {
+            //most likely will have to change to append and build URI - then parse
+            URL url = new URL("http://www.omdbapi.com/?s="+ filmTitle +"&apikey=822594fa");
             //"http://www.omdbapi.com/apikey=822594fa"
+
+
 
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
@@ -52,19 +65,20 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return null;*/
+        return NetworkUtils.getFilmInfo(strings[0]);
     }
 
     //UI thread
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
 
-        searchActivity.data.setText(this.data);
+        //searchActivity.data.setText(this.data);
     }
 
 
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+   /* public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
@@ -81,5 +95,5 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
         } finally {
             urlConnection.disconnect();
         }
-    }
-}*/
+    }*/
+}
