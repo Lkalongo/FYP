@@ -26,7 +26,7 @@ public class watching extends AppCompatActivity
     private static final String TAG = watching.class.getSimpleName();
    // private Button watchlist, finished,watching, settings;
     private EditText nFilmInput;
-    private TextView nYearText, nTypeText;
+    private TextView nYearText, nTitleText;
 
    ArrayAdapter<String> adapter;
 
@@ -41,7 +41,7 @@ public class watching extends AppCompatActivity
 
         nFilmInput = (EditText) findViewById(R.id.filmInput);
         nYearText = (TextView) findViewById(R.id.yearText);
-        nTypeText = (TextView) findViewById(R.id.typeText) ;
+        nTitleText = (TextView) findViewById(R.id.titleText) ;
 
         //implement listview here
         /*ListView lv = (ListView)findViewById(R.id.emptyListViewFilm); //needs to be empty
@@ -146,7 +146,7 @@ public class watching extends AppCompatActivity
    {
        String queryString = nFilmInput.getText().toString();
        Log.i(TAG, "searchFilms:" +queryString);
-       new fetchData(nYearText, nTypeText).execute(queryString);
+       new fetchData(nYearText, nTitleText, nFilmInput).execute(queryString);
    }
 }
 

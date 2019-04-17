@@ -20,25 +20,37 @@ public class NetworkUtils
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     //Base URL for API
     private final static String OMDB_BASE_URL = "http://www.omdbapi.com/?s=";
-    //private final static String QUERY_PARAM = "q";
-    //private final static String API_KEY = "822594fa";
-    private final static String PARAM_API_KEY = "apikey=822594fa";
+    private final static String QUERY_PARAM = "q";
+    private final static String API_KEY = "822594fa";
+    private final static String PARAM_API_KEY = "apikey=";
+   // String queryString = null;
 
 
-    static String getFilmInfo (String queryString)
+
+    public static String getFilmInfo (String queryString)
     {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String filmJSONString = null;
+        //String queryString = null;
        // return filmJSONString;
+
 
         try
         {
-            Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
+           /* Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
                     // .appendQueryParameter(PARAM_API_KEY)
                     .appendQueryParameter(queryString, PARAM_API_KEY)
 
+                    .build();*/
+
+            Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
+                    .appendQueryParameter(QUERY_PARAM, queryString)
+                    .appendQueryParameter(API_KEY, PARAM_API_KEY)
                     .build();
+
+           // Log.i(LOG_TAG, "build Uri" +builtUri);
+            Log.i(LOG_TAG,"Build uri" + queryString);
 
             URL requestURL = new URL(builtUri.toString());
 

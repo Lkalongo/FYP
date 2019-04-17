@@ -2,10 +2,12 @@
 package com.example.lorraine.fyp;
 
 import android.os.AsyncTask;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,13 +19,14 @@ import java.util.Scanner;
 
 public class fetchData extends AsyncTask<String, Void, String>
 {
+    private EditText nFilmInput;
     private TextView nYearText;
-    private TextView nTypeText;
+    private TextView nTitleText;
 
-    public fetchData (TextView nYearText, TextView nTypeText)
-    {
+    public fetchData(TextView nYearText, TextView nTitleText, EditText nFilmInput) {
         this.nYearText = nYearText;
-        this.nTypeText = nTypeText;
+        this.nTitleText = nTitleText;
+        this.nFilmInput = nFilmInput;
     }
 
     //JSON file - used to hold the data from JSON
@@ -71,10 +74,52 @@ public class fetchData extends AsyncTask<String, Void, String>
 
     //UI thread
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(String s)
+    {
         super.onPostExecute(s);
+        /*try {
+            //for parsing and formatting data
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray itemsArray = jsonObject.getJSONArray("items");
 
-        //searchActivity.data.setText(this.data);
+            for (int i = 0; i < itemsArray.length(); i++)
+            {
+                JSONObject film = itemsArray.getJSONObject(i);
+                String title = null;
+                String year = null;
+
+                //needed??
+                JSONObject filmInfo = film.getJSONObject("filmInfo");
+
+                try
+                {
+                    title = filmInfo.getString("title");
+                    year = filmInfo.getString("year");
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                //if both a title and year exist update the TextViews and return
+                if (title != null && year != null)
+                {
+                    nTitleText.setText(title);
+                    nYearText.setText(year);
+                }
+            }
+            //searchActivity.data.setText(this.data);
+            nTitleText.setText("No Results Found");
+            nYearText.setText("");
+        }
+        catch(Exception e)
+        {
+                nTitleText.setText("No Results Found");
+                nYearText.setText("");
+                e.printStackTrace();
+
+        }*/
     }
 
 
@@ -96,4 +141,4 @@ public class fetchData extends AsyncTask<String, Void, String>
             urlConnection.disconnect();
         }
     }*/
-}
+    }
