@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class watching extends AppCompatActivity
     private EditText nFilmInput;
     private TextView nYearText, nTitleText;
 
-   ArrayAdapter<String> adapter;
+  // ArrayAdapter<String> adapter;
 
 
     @Override
@@ -142,11 +143,19 @@ public class watching extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }*/
 
+   //this is the onClick for the button
    public void searchFilms (View view)
    {
        String queryString = nFilmInput.getText().toString();
        Log.i(TAG, "searchFilms:" +queryString);
-       new fetchData(nYearText, nTitleText, nFilmInput).execute(queryString);
+       if(queryString.length() !=0)
+       {
+           new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
+       }
+       else
+       {
+           Toast.makeText(this, "Please enter a search term.", Toast.LENGTH_SHORT).show();
+       }
    }
 }
 

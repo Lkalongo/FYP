@@ -1,3 +1,4 @@
+/*
 package com.example.lorraine.fyp;
 
 import android.net.Uri;
@@ -38,11 +39,13 @@ public class NetworkUtils
 
         try
         {
-           /* Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
+           */
+/* Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
                     // .appendQueryParameter(PARAM_API_KEY)
                     .appendQueryParameter(queryString, PARAM_API_KEY)
 
-                    .build();*/
+                    .build();*//*
+
 
             Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, queryString)
@@ -100,7 +103,7 @@ public class NetworkUtils
                     e.printStackTrace();
                 }
             }
-            Log.i(LOG_TAG, filmJSONString);
+            //Log.i(LOG_TAG, filmJSONString); //HERE
             return filmJSONString;
         }
 
@@ -109,7 +112,8 @@ public class NetworkUtils
     }
 
 
-   /* private final static String API_KEY = "822594fa";
+   */
+/* private final static String API_KEY = "822594fa";
     private final static String PARAM_API_KEY = "apikey" ;
 
     public static URL buildUrlForOmdb()
@@ -158,5 +162,7 @@ public class NetworkUtils
         {
             urlConnection.disconnect();
         }
-    }*/
+    }*//*
+
 }
+*/

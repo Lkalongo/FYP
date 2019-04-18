@@ -1,3 +1,4 @@
+/*
 
 package com.example.lorraine.fyp;
 
@@ -17,29 +18,37 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class fetchData extends AsyncTask<String, Void, String>
+import static android.net.wifi.WifiConfiguration.Status.strings;
+
+public class fetchData extends AsyncTask<String, Void, String> //HERE
 {
     private EditText nFilmInput;
     private TextView nYearText;
     private TextView nTitleText;
 
-    public fetchData(TextView nYearText, TextView nTitleText, EditText nFilmInput) {
+
+
+    public fetchData(TextView nYearText, TextView nTitleText, EditText nFilmInput)
+    {
         this.nYearText = nYearText;
         this.nTitleText = nTitleText;
         this.nFilmInput = nFilmInput;
     }
 
     //JSON file - used to hold the data from JSON
-    /*String data = "";
+    */
+/*String data = "";
     String dataParsed = "";
     String singleParsed = "";
-    String filmTitle = "avengers";*/
+    String filmTitle = "avengers";*//*
+
 
     //background thread
     @Override
-    protected String doInBackground(String... strings)
+    protected String doInBackground(String... params)
     {
-        /*try {
+        */
+/*try {
             //most likely will have to change to append and build URI - then parse
             URL url = new URL("http://www.omdbapi.com/?s="+ filmTitle +"&apikey=822594fa");
             //"http://www.omdbapi.com/apikey=822594fa"
@@ -68,8 +77,9 @@ public class fetchData extends AsyncTask<String, Void, String>
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;*/
-        return NetworkUtils.getFilmInfo(strings[0]);
+        return null;*//*
+
+        return NetworkUtils.getFilmInfo(strings[0]); //HERE
     }
 
     //UI thread
@@ -77,7 +87,7 @@ public class fetchData extends AsyncTask<String, Void, String>
     protected void onPostExecute(String s)
     {
         super.onPostExecute(s);
-        /*try {
+        try {
             //for parsing and formatting data
             JSONObject jsonObject = new JSONObject(s);
             JSONArray itemsArray = jsonObject.getJSONArray("items");
@@ -119,11 +129,12 @@ public class fetchData extends AsyncTask<String, Void, String>
                 nYearText.setText("");
                 e.printStackTrace();
 
-        }*/
+        }
     }
 
 
-   /* public static String getResponseFromHttpUrl(URL url) throws IOException {
+   */
+/* public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
@@ -140,5 +151,7 @@ public class fetchData extends AsyncTask<String, Void, String>
         } finally {
             urlConnection.disconnect();
         }
-    }*/
+    }*//*
+
     }
+*/

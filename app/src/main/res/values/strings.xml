@@ -20,6 +20,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="no_results">No results</string>
 
     <string-array name="array_film">
         <item>Iron Man</item>
