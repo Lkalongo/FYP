@@ -29,6 +29,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         this.nFilmInput = filmInput;
         this.nTitleText = titleText;
         this.nYearText = yearText;
+        String data = "";
     }
 
     //@param
@@ -54,9 +55,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
             //building uri
             Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, queryString)
-                   // .appendQueryParameter(queryString)
                     .appendQueryParameter(PARAM_API_KEY, API_KEY)
-                   // .appendQueryParameter(PARAM_API_KEY)
                     .build();
 
             Log.i(LOG_TAG, "build uri: " + builtUri);
@@ -104,6 +103,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
                 }
             }
         }
+        Log.i(LOG_TAG, "doInBackground: filmJSONString: " + filmJSONString);
         return filmJSONString;
     }
 
@@ -112,7 +112,8 @@ public class FetchFilm extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String s)
     {
-        super.onPostExecute(s);
+
+       // watching.data.setText(this.data);
         try
         {
             JSONObject jsonObject = new JSONObject(s);
@@ -157,9 +158,6 @@ public class FetchFilm extends AsyncTask<String, Void, String>
             nYearText.setText("");
             e.printStackTrace();
         }
-
-
+        super.onPostExecute(s);
     }
-
-
 }

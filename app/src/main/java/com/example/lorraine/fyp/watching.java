@@ -28,8 +28,11 @@ public class watching extends AppCompatActivity
    // private Button watchlist, finished,watching, settings;
     private EditText nFilmInput;
     private TextView nYearText, nTitleText;
+    //public static TextView data;
+    private ListView listView;
+    private ArrayList<Film> filmArrayList = new ArrayList<>();
 
-  // ArrayAdapter<String> adapter;
+  ArrayAdapter<String> adapter;
 
 
     @Override
@@ -43,6 +46,11 @@ public class watching extends AppCompatActivity
         nFilmInput = (EditText) findViewById(R.id.filmInput);
         nYearText = (TextView) findViewById(R.id.yearText);
         nTitleText = (TextView) findViewById(R.id.titleText) ;
+        //data = (TextView) findViewById(R.id.FetchFilm);
+
+        listView = findViewById(R.id.idListView);
+
+
 
         //implement listview here
         /*ListView lv = (ListView)findViewById(R.id.emptyListViewFilm); //needs to be empty
