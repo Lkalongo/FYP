@@ -1,4 +1,5 @@
 /*
+
 package com.example.lorraine.fyp;
 
 import android.net.Uri;
@@ -21,7 +22,7 @@ public class NetworkUtils
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     //Base URL for API
     private final static String OMDB_BASE_URL = "http://www.omdbapi.com/?s=";
-    private final static String QUERY_PARAM = "q";
+    private final static String QUERY_PARAM = "s";
     private final static String API_KEY = "822594fa";
     private final static String PARAM_API_KEY = "apikey=";
    // String queryString = null;
@@ -39,21 +40,13 @@ public class NetworkUtils
 
         try
         {
-           */
-/* Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
-                    // .appendQueryParameter(PARAM_API_KEY)
-                    .appendQueryParameter(queryString, PARAM_API_KEY)
-
-                    .build();*//*
-
 
             Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, queryString)
-                    .appendQueryParameter(API_KEY, PARAM_API_KEY)
+                    .appendQueryParameter(PARAM_API_KEY, API_KEY)
                     .build();
 
-           // Log.i(LOG_TAG, "build Uri" +builtUri);
-            Log.i(LOG_TAG,"Build uri" + queryString);
+            Log.i(LOG_TAG,"Build uri" + builtUri);
 
             URL requestURL = new URL(builtUri.toString());
 
@@ -113,10 +106,7 @@ public class NetworkUtils
 
 
    */
-/* private final static String API_KEY = "822594fa";
-    private final static String PARAM_API_KEY = "apikey" ;
-
-    public static URL buildUrlForOmdb()
+/* public static URL buildUrlForOmdb()
     {
         Uri builtUri = Uri.parse(OMDB_BASE_URL).buildUpon()
             .appendQueryParameter(PARAM_API_KEY, API_KEY)
@@ -135,7 +125,8 @@ public class NetworkUtils
         }
         Log.i(TAG, "buildUrlForOmdb: url:"+ url);
         return url;
-    }
+    }*//*
+
 
     public static String getResponseFromHttpUrl(URL url) throws IOException
     {
@@ -162,7 +153,8 @@ public class NetworkUtils
         {
             urlConnection.disconnect();
         }
-    }*//*
+    }
 
 }
+
 */

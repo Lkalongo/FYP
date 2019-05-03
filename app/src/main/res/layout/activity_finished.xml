@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,10 +20,19 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
+
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_finished" />
-    <include layout="@layout/activity_bottom_navigation"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navBlue"
+        app:menu="@menu/m_bottom_navigation_menu" />
 
 
-</LinearLayout>
+</RelativeLayout>

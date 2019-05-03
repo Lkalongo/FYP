@@ -1,9 +1,12 @@
+
 package com.example.lorraine.fyp;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -15,12 +18,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class FetchFilm extends AsyncTask<String, Void, String>
+public class FetchFilm
+        //extends AsyncTask<String, Void, String>
 {
-    private EditText nFilmInput;
+
+}
+   /* private EditText nFilmInput;
     private TextView nTitleText;
     private TextView nYearText;
+
+    ListView listView;
+    ArrayList<String> filmArrayList = new ArrayList<String>();
 
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
 
@@ -29,7 +39,8 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         this.nFilmInput = filmInput;
         this.nTitleText = titleText;
         this.nYearText = yearText;
-        String data = "";
+       // String data = "";
+        //String filmJSONString = "";
     }
 
     //@param
@@ -41,9 +52,11 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         //search string
         String queryString = params[0];
 
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        String filmJSONString = null;
+        //contains JSON response as string
+       String filmJSONString = "";
 
         try
         {
@@ -66,6 +79,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
+            //for converting inputstream to string
             InputStream inputStream = urlConnection.getInputStream();
             StringBuilder builder = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -80,6 +94,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
                 return null;
             }
             filmJSONString = builder.toString();
+            //getFilmDataFromJSON(filmJSONString);
         }
         catch (IOException e)
         {
@@ -107,7 +122,68 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         return filmJSONString;
     }
 
-    //@params
+    protected void onPostExecute(String dataFetched)
+    {
+        //parse then display
+        parseJSON(dataFetched);
+
+  //parsing JSON
+            try
+            {
+                //JSONObject filmJSON = new JSONObject(filmJSONString);
+                JSONArray jArray =  new JSONArray(filmJSONString);
+                for(int i = 0; i<jArray.length(); i++)
+                {
+                    //values collected
+                    JSONObject jObject = jArray.getJSONObject(i);
+
+                    String name = jObject.getString("name");
+
+                }
+
+
+
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+
+            }*//*
+
+
+    }
+
+    private void parseJSON(String data)
+    {
+        try
+        {
+           JSONArray jsonMainNode = new JSONArray(data);
+
+           int jsonArrLength = jsonMainNode.length();
+
+           for(int i=0; i< jsonMainNode.length(); i++)
+           {
+               JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+               String postTitle = jsonChildNode.getString("post_title");
+               filmArrayList.add(postTitle);
+           }
+           //get listview object from xml
+           listView = (ListView) findViewBy(R.id.list);
+
+            ArrayAdapter<String> adapter = ArrayAdapter<String>(FetchFilm.this, android.R.layout.simple_list 1, android.R.id.text1, tutorialList);
+
+            listView.setAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.i("app", "Error parsing data" + e.getMessage());
+        }
+    }
+
+
+
+
+ //@params
 
     @Override
     protected void onPostExecute(String s)
@@ -160,4 +236,6 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         }
         super.onPostExecute(s);
     }
-}
+
+}*/
+

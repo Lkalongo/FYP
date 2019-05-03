@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
         listView =findViewById(R.id.idListView);
 
-        URL omdbUrl = NetworkUtils.buildUrlForOmdb();
+        URL omdbUrl = NetworkUtils.getFilmInfo();
         new FetchOmdbDetails().execute(omdbUrl);
         Log.i(TAG, "onCreate: omdbUrl:" + omdbUrl);
     }
@@ -152,3 +152,4 @@ public class MainActivity extends AppCompatActivity
     }
 }
 */
+

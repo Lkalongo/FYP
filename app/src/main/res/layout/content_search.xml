@@ -8,6 +8,12 @@
     tools:context=".searchActivity"
     tools:showIn="@layout/activity_search">
 
+    <EditText
+        android:id="@+id/filmInput"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="text" />
+
     <Button
         android:id="@+id/qButton"
         android:layout_width="wrap_content"
@@ -18,15 +24,16 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/qButton">
+        android:layout_below="@id/qButton"
+        android:layout_marginTop="102dp">
 
-        <TextView
+       <TextView
             android:id="@+id/fetchData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:hint="Fetched Text Here"
             android:padding="5dp"
-            android:textSize="24sp"
-            android:hint="Fetched Text Here"/>
+            android:textSize="24sp" />
     </ScrollView>
 
 </RelativeLayout>

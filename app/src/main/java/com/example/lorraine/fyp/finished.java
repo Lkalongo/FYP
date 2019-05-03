@@ -1,7 +1,10 @@
 package com.example.lorraine.fyp;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,33 +17,47 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class finished extends AppCompatActivity
 {
-    private Button watchlist;
-    private Button finished;
-    private Button watching;
-    private Button settings;
-    private Button searchA;
-    private Button mainActivity;
-
-
     ArrayAdapter<String> adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finished);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView lv = (ListView)findViewById(R.id.listViewFilm);
+        //bottom navigation - go in a its own class
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_watchlist:
+                        Toast.makeText(finished.this, "Watchlist", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_watching:
+                        Toast.makeText(finished.this, "Watching", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_finished:
+                        Toast.makeText(finished.this, "Finished", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+        ListView lv = (ListView) findViewById(R.id.listViewFilm);
         ArrayList<String> arrayFilm = new ArrayList<>();
-        arrayFilm.addAll(Arrays.asList(getResources () .getStringArray(R.array.array_film)));
+        arrayFilm.addAll(Arrays.asList(getResources().getStringArray(R.array.array_film)));
 
         adapter = new ArrayAdapter<>
                 (
@@ -49,104 +66,10 @@ public class finished extends AppCompatActivity
                         arrayFilm
                 );
         lv.setAdapter(adapter);
-
-        watchlist= (Button) findViewById(R.id.watchlist);
-        watchlist.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openwatchlist();
-            }
-        });
-
-        finished= (Button) findViewById(R.id.finished);
-        finished.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openfinished();
-            }
-        });
-
-        watching= (Button) findViewById(R.id.watching);
-        watching.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openwatching();
-            }
-        });
-
-        settings= (Button) findViewById(R.id.settings);
-        settings.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                opensettings();
-            }
-        });
-
-        searchA= (Button) findViewById(R.id.searchA);
-        searchA.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                opensearchA();
-            }
-        });
-
-       /* mainActivity= (Button) findViewById(R.id.mainActivity);
-        mainActivity.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openmainActivity();
-            }
-        });*/
-
-
     }
 
-    public void openwatchlist()
-    {
-        Intent intent = new Intent(this, watchlist.class);
-        startActivity(intent);
-    }
 
-    public void openfinished()
-    {
-        Intent intent = new Intent(this, finished.class);
-        startActivity(intent);
-    }
 
-    public void openwatching()
-    {
-        Intent intent = new Intent(this, watching.class);
-        startActivity(intent);
-    }
-
-    public void opensettings()
-    {
-        Intent intent = new Intent(this, settings.class);
-        startActivity(intent);
-    }
-    public void opensearchA()
-    {
-        Intent intent = new Intent(this, searchActivity.class);
-        startActivity(intent);
-    }
-
-   /* public void openmainActivity()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
     /*
     * Section for the search bar functionality
     * inc. listener

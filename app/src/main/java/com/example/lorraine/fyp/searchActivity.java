@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class searchActivity extends AppCompatActivity
 {
-   /* Button click;
+    Button click;
     public static TextView data;
 
     @Override
@@ -36,6 +36,6 @@ public class searchActivity extends AppCompatActivity
                 process.execute();
             }
         });
-    }*/
+    }
 }
 

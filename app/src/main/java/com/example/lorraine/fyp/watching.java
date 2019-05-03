@@ -29,8 +29,9 @@ public class watching extends AppCompatActivity
     private EditText nFilmInput;
     private TextView nYearText, nTitleText;
     //public static TextView data;
-    private ListView listView;
-    private ArrayList<Film> filmArrayList = new ArrayList<>();
+    ListView listView;
+    ArrayList<Film> filmArrayList = new ArrayList<>();
+
 
   ArrayAdapter<String> adapter;
 
@@ -44,11 +45,12 @@ public class watching extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         nFilmInput = (EditText) findViewById(R.id.filmInput);
-        nYearText = (TextView) findViewById(R.id.yearText);
-        nTitleText = (TextView) findViewById(R.id.titleText) ;
+      //  nYearText = (TextView) findViewById(R.id.yearText);
+        //nTitleText = (TextView) findViewById(R.id.titleText) ;
         //data = (TextView) findViewById(R.id.FetchFilm);
 
         listView = findViewById(R.id.idListView);
+
 
 
 
@@ -158,7 +160,7 @@ public class watching extends AppCompatActivity
        Log.i(TAG, "searchFilms:" +queryString);
        if(queryString.length() !=0)
        {
-           new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
+           //new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
        }
        else
        {

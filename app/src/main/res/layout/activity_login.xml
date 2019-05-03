@@ -9,8 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
-   // android:background="@drawable/loginBackground">
+    tools:context=".LoginActivity"
+    android:background="@drawable/ic_background_image">
 
 
 
@@ -41,7 +41,8 @@
                 <AutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -56,14 +57,15 @@
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="@color/white"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -73,8 +75,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/yellowGold"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/blackBlack"/>
+
+            <Button
+                android:id="@+id/signUp"
+                style="?android:textAppearanceSmall"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/yellowGold"
+                android:text="Sign up"
+                android:textStyle="bold"
+                android:textColor="@color/blackBlack"
+                android:layout_marginLeft="120dp"/>
 
 
         </LinearLayout>

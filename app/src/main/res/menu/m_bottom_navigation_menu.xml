@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_watchlist"
+        android:enabled="true"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="iWatchlist"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_watching"
+        android:enabled="true"
+        android:icon="@drawable/ic_watching_24dp"
+        android:title="iWatching"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_finished"
+        android:enabled="true"
+        android:icon="@drawable/ic_finished_24dp"
+        android:title="iFinished"
+        app:showAsAction="ifRoom" />
+
+</menu>
