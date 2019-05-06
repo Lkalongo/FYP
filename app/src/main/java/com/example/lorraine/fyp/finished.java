@@ -34,23 +34,33 @@ public class finished extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         //bottom navigation - go in a its own class
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+           @Override
+           public boolean onNavigationItemSelected(@NonNull MenuItem item)
+           {
+                switch (item.getItemId())
+                {
                     case R.id.action_watchlist:
                         Toast.makeText(finished.this, "Watchlist", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(finished.this, watchlist.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_watching:
                         Toast.makeText(finished.this, "Watching", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(finished.this, watching.class);
+                        startActivity(intent1);
                         break;
                     case R.id.action_finished:
                         Toast.makeText(finished.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(finished.this, finished.class);
+                        startActivity(intent2);
                         break;
                 }
-                return true;
+                return false;
             }
         });
 
@@ -58,14 +68,9 @@ public class finished extends AppCompatActivity
         ListView lv = (ListView) findViewById(R.id.listViewFilm);
         ArrayList<String> arrayFilm = new ArrayList<>();
         arrayFilm.addAll(Arrays.asList(getResources().getStringArray(R.array.array_film)));
-
-        adapter = new ArrayAdapter<>
-                (
-                        finished.this,
-                        android.R.layout.simple_list_item_1,
-                        arrayFilm
-                );
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayFilm);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new ArrayView);
     }
 
 

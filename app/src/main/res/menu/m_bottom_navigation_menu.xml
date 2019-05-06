@@ -6,19 +6,22 @@
         android:id="@+id/action_watchlist"
         android:enabled="true"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"
-        android:title="iWatchlist"
-        app:showAsAction="ifRoom"/>
+        android:title="Watchlist"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/white"/>
     <item
         android:id="@+id/action_watching"
         android:enabled="true"
         android:icon="@drawable/ic_watching_24dp"
-        android:title="iWatching"
-        app:showAsAction="ifRoom" />
+        android:title="Watching"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/white"/>
     <item
         android:id="@+id/action_finished"
         android:enabled="true"
         android:icon="@drawable/ic_finished_24dp"
-        android:title="iFinished"
-        app:showAsAction="ifRoom" />
+        android:title="Finished"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/white"/>
 
 </menu>

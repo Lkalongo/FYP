@@ -15,12 +15,24 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/navBlue"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_watching" />
+    <include
+        android:id="@+id/include2"
+        layout="@layout/content_watching" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navBlue"
+        app:layout_anchor="@+id/include2"
+        app:layout_anchorGravity="bottom|center"
+        app:menu="@menu/m_bottom_navigation_menu" />
 
 
 </android.support.design.widget.CoordinatorLayout>

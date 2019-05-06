@@ -2,6 +2,8 @@ package com.example.lorraine.fyp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,18 +24,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class watching extends AppCompatActivity
-{
+public class watching extends AppCompatActivity {
+    public static TextView data;
     private static final String TAG = watching.class.getSimpleName();
-   // private Button watchlist, finished,watching, settings;
-    private EditText nFilmInput;
-    private TextView nYearText, nTitleText;
-    //public static TextView data;
-    ListView listView;
+
     ArrayList<Film> filmArrayList = new ArrayList<>();
 
+    //  ListView listView = findViewById(R.id.wListView);
+    //listView.setAdapter(adapter);
 
-  ArrayAdapter<String> adapter;
+    // ArrayAdapter<String> adapter =
+    //new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+
+    //ListView listView = (ListView) findViewById(R.id.wListView);
+    //  listView.setAdapter(adapter);
 
 
     @Override
@@ -44,128 +48,43 @@ public class watching extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        nFilmInput = (EditText) findViewById(R.id.filmInput);
-      //  nYearText = (TextView) findViewById(R.id.yearText);
-        //nTitleText = (TextView) findViewById(R.id.titleText) ;
-        //data = (TextView) findViewById(R.id.FetchFilm);
 
-        listView = findViewById(R.id.idListView);
+        //ListView adapter - 3/5
+        ArrayList<Film> arrayOfFilms = new ArrayList<Film>();
+        FilmsAdapter fAdapter = new FilmsAdapter(this, arrayOfFilms);
+
+        ListView listView = findViewById(R.id.wListView);
+        //listView.setAdapter(adapter);
+
+        //data = (TextView)findViewById(R.id.oldListView);
 
 
-
-
-        //implement listview here
-        /*ListView lv = (ListView)findViewById(R.id.emptyListViewFilm); //needs to be empty
-        ArrayList<String> arrayFilm = new ArrayList<>();
-
-        //comment from here
-        arrayFilm.addAll(Arrays.asList(getResources () .getStringArray(R.array.array_film)));
-
-        adapter = new ArrayAdapter<>
-                (
-                        watching.this,
-                        android.R.layout.simple_list_item_1,
-                        arrayFilm
-                );
-        lv.setAdapter(adapter);*/
-        //to here to clear list
-        //edit
-
-       /* watchlist = (Button) findViewById(R.id.watchlist);
-        watchlist.setOnClickListener(new View.OnClickListener() {
+        //bottom navigation - go in a its own class
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                openwatchlist();
-            }
-        });
-
-        finished = (Button) findViewById(R.id.finished);
-        finished.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openfinished();
-            }
-        });
-
-        watching = (Button) findViewById(R.id.watching);
-        watching.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openwatching();
-            }
-        });
-
-        settings = (Button) findViewById(R.id.settings);
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                opensettings();
-            }
-        });*/
-
-    }
-
-   /* public void openwatchlist() {
-        Intent intent = new Intent(this, watchlist.class);
-        startActivity(intent);
-    }
-
-    public void openfinished() {
-        Intent intent = new Intent(this, finished.class);
-        startActivity(intent);
-    }
-
-    public void openwatching() {
-        Intent intent = new Intent(this, watching.class);
-        startActivity(intent);
-    }
-
-    public void opensettings() {
-        Intent intent = new Intent(this, settings.class);
-        startActivity(intent);
-    }*/
-
-    //the actual original search bar
-   /*@Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        //menuSearch - is in res-menu. This is the search item
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem item = menu.findItem(R.id.menuSearch);
-        SearchView searchView = (SearchView) item.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_watchlist:
+                        Toast.makeText(watching.this, "Watchlist", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(watching.this, watchlist.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_watching:
+                        Toast.makeText(watching.this, "Watching", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(watching.this, watching.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.action_finished:
+                        Toast.makeText(watching.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(watching.this, finished.class);
+                        startActivity(intent2);
+                        break;
+                }
                 return false;
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-
         });
 
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
-   //this is the onClick for the button
-   public void searchFilms (View view)
-   {
-       String queryString = nFilmInput.getText().toString();
-       Log.i(TAG, "searchFilms:" +queryString);
-       if(queryString.length() !=0)
-       {
-           //new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
-       }
-       else
-       {
-           Toast.makeText(this, "Please enter a search term.", Toast.LENGTH_SHORT).show();
-       }
-   }
+    }
 }
 

@@ -1,3 +1,4 @@
+/*
 
 package com.example.lorraine.fyp;
 
@@ -86,7 +87,8 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
         {
             e.printStackTrace();
         }
-       /* finally
+       */
+/* finally
         {
             if(urlConnection !=null)
             {
@@ -103,12 +105,14 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
                     e.printStackTrace();
                 }
             }
-        }*/
+        }*//*
+
         Log.i(LOG_TAG, "doInBackground: filmJSONString: " + filmJSONString);
         return null;
        // return filmJSONString;
 
-           /* //read line and assign to line
+           */
+/* //read line and assign to line
             String line = "";
             while ((line = bufferedReader.readLine()) !=null)
             {
@@ -127,7 +131,8 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
         }
         return null;
 
-       // return NetworkUtils.getFilmInfo(strings[0]); //HERE*/
+       // return NetworkUtils.getFilmInfo(strings[0]); //HERE*//*
+
     }
 
     //UI thread
@@ -135,7 +140,8 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
     protected void onPostExecute(String filmJSONString)
     {
         super.onPostExecute(filmJSONString);
-        /*try {
+        */
+/*try {
             //for parsing and formatting data
             JSONObject jsonObject = new JSONObject(s);
             JSONArray itemsArray = jsonObject.getJSONArray("items");
@@ -166,9 +172,11 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
                     nTitleText.setText(title);
                     nYearText.setText(year);
                 }
-            }*/
+            }*//*
+
             searchActivity.data.setText(this.data);
-           /* nTitleText.setText("No Results Found");
+           */
+/* nTitleText.setText("No Results Found");
             nYearText.setText("");
         }
         catch(Exception e)
@@ -177,10 +185,12 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
                 nYearText.setText("");
                 e.printStackTrace();
 
-        }*/
+        }*//*
+
     }
 
 
+*/
 /*
  public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -200,6 +210,8 @@ public class fetchData extends AsyncTask<String, Void, String> //HERE
             urlConnection.disconnect();
         }
     }
-*/
+*//*
+
 
 }
+*/

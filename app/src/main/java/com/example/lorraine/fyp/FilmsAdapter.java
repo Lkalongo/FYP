@@ -12,9 +12,39 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FilmAdapter extends ArrayAdapter<Film>
+public class FilmsAdapter extends ArrayAdapter<Film>
 {
-    public FilmAdapter(@NonNull Context context, ArrayList<Film> filmArrayList)
+    public FilmsAdapter(Context context, ArrayList<Film> films)
+    {
+        super (context, 0, films);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        Film film = getItem(position);
+        if(convertView == null)
+        {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_film, parent, false);
+        }
+        TextView fName = (TextView) convertView.findViewById(R.id.fName);
+        TextView fType = (TextView) convertView.findViewById(R.id.fType);
+        TextView fYear = (TextView) convertView.findViewById(R.id.fYear);
+        TextView fPoster = (TextView) convertView.findViewById(R.id.fPoster);
+
+        fName.setText(film.name);
+        fType.setText(film.type);
+        fYear.setText(film.year);
+        fPoster.setText(film.poster);
+
+        return convertView;
+
+    }
+
+
+
+
+    /*public FilmAdapter(@NonNull Context context, ArrayList<Film> filmArrayList)
     {
         super(context,0, filmArrayList);
     }
@@ -45,6 +75,6 @@ public class FilmAdapter extends ArrayAdapter<Film>
 
         return convertView;
     }
-
+*/
 
 }

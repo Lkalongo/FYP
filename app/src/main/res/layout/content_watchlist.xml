@@ -9,31 +9,6 @@
     tools:showIn="@layout/activity_watchlist">
 
     <Button
-        android:id="@+id/watchlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Watchlist"/>
-
-
-    <Button
-        android:id="@+id/watching"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Watching"/>
-
-    <Button
-        android:id="@+id/finished"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:text="Finished"/>
-
-    <Button
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

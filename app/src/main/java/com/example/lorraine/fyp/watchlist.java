@@ -1,11 +1,15 @@
 package com.example.lorraine.fyp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class watchlist extends AppCompatActivity
 {
@@ -23,70 +27,36 @@ public class watchlist extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        watchlist= (Button) findViewById(R.id.watchlist);
-        watchlist.setOnClickListener(new View.OnClickListener()
+        //bottom navigation - go in a its own class
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
         {
             @Override
-            public void onClick(View view)
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
             {
-                openwatchlist();
-            }
-        });
-
-        finished= (Button) findViewById(R.id.finished);
-        finished.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openfinished();
-            }
-        });
-
-        watching= (Button) findViewById(R.id.watching);
-        watching.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                openwatching();
-            }
-        });
-
-        settings= (Button) findViewById(R.id.settings);
-        settings.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                opensettings();
+                switch (item.getItemId())
+                {
+                    case R.id.action_watchlist:
+                        Toast.makeText(watchlist.this, "Watchlist", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(watchlist.this, watchlist.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_watching:
+                        Toast.makeText(watchlist.this, "Watching", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(watchlist.this, watching.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.action_finished:
+                        Toast.makeText(watchlist.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(watchlist.this, finished.class);
+                        startActivity(intent2);
+                        break;
+                }
+                return false;
             }
         });
 
     }
 
-    public void openwatchlist()
-    {
-        Intent intent = new Intent(this, watchlist.class);
-        startActivity(intent);
-    }
-
-    public void openfinished()
-    {
-        Intent intent = new Intent(this, finished.class);
-        startActivity(intent);
-    }
-
-    public void openwatching()
-    {
-        Intent intent = new Intent(this, watching.class);
-        startActivity(intent);
-    }
-
-    public void opensettings()
-    {
-        Intent intent = new Intent(this, settings.class);
-        startActivity(intent);
-    }
 
 }

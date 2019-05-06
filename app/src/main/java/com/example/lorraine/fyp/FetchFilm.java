@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -20,31 +21,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class FetchFilm
-        //extends AsyncTask<String, Void, String>
+public class FetchFilm extends AsyncTask<String, Void, String>
 {
-
-}
-   /* private EditText nFilmInput;
-    private TextView nTitleText;
-    private TextView nYearText;
-
-    ListView listView;
+    String data = "";
     ArrayList<String> filmArrayList = new ArrayList<String>();
 
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
-
-    public FetchFilm(TextView titleText, TextView yearText, EditText filmInput)
-    {
-        this.nFilmInput = filmInput;
-        this.nTitleText = titleText;
-        this.nYearText = yearText;
-       // String data = "";
-        //String filmJSONString = "";
-    }
-
-    //@param
-    //@return
 
     @Override
     protected String doInBackground(String ...params)
@@ -55,6 +37,7 @@ public class FetchFilm
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
+
         //contains JSON response as string
        String filmJSONString = "";
 
@@ -84,10 +67,11 @@ public class FetchFilm
             StringBuilder builder = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line;
+            String line = "";
             while((line = reader.readLine())!=null)
             {
                 builder.append(line + "\n");
+                data = data + line;
             }
             if(builder.length() == 0)
             {
@@ -122,120 +106,31 @@ public class FetchFilm
         return filmJSONString;
     }
 
-    protected void onPostExecute(String dataFetched)
+    protected void onPostExecute(String s)
+            //(Void aVoid)
     {
-        //parse then display
-        parseJSON(dataFetched);
+        super.onPostExecute(s);
+        //super.onPostExecute(aVoid);
+        watching.data.setText(this.data);
 
-  //parsing JSON
+        // Factory method to convert an array of JSON objects into a list of objects
+        // Film.fromJson(jsonArray);
+    }
+
+    public static ArrayList<Film> fromJson(JSONArray jsonObjects)
+    {
+        ArrayList<Film> films = new ArrayList<Film>();
+        for (int i = 0; i < jsonObjects.length(); i++)
+        {
             try
             {
-                //JSONObject filmJSON = new JSONObject(filmJSONString);
-                JSONArray jArray =  new JSONArray(filmJSONString);
-                for(int i = 0; i<jArray.length(); i++)
-                {
-                    //values collected
-                    JSONObject jObject = jArray.getJSONObject(i);
-
-                    String name = jObject.getString("name");
-
+                films.add(new Film(jsonObjects.getJSONObject(i)));
                 }
-
-
-
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-
-            }*//*
-
-
-    }
-
-    private void parseJSON(String data)
-    {
-        try
-        {
-           JSONArray jsonMainNode = new JSONArray(data);
-
-           int jsonArrLength = jsonMainNode.length();
-
-           for(int i=0; i< jsonMainNode.length(); i++)
-           {
-               JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-               String postTitle = jsonChildNode.getString("post_title");
-               filmArrayList.add(postTitle);
-           }
-           //get listview object from xml
-           listView = (ListView) findViewBy(R.id.list);
-
-            ArrayAdapter<String> adapter = ArrayAdapter<String>(FetchFilm.this, android.R.layout.simple_list 1, android.R.id.text1, tutorialList);
-
-            listView.setAdapter(adapter);
-        }
-        catch (Exception e)
-        {
-            Log.i("app", "Error parsing data" + e.getMessage());
-        }
-    }
-
-
-
-
- //@params
-
-    @Override
-    protected void onPostExecute(String s)
-    {
-
-       // watching.data.setText(this.data);
-        try
-        {
-            JSONObject jsonObject = new JSONObject(s);
-            JSONArray itemsArray = jsonObject.getJSONArray("items");
-
-            int i = 0;
-            String title = null;
-            String year = null;
-
-            while(i<itemsArray.length() || (year == null && title == null))
-            {
-                JSONObject film = itemsArray.getJSONObject(i);
-                JSONObject filmType = film.getJSONObject("filmType");
-
-                try
-                {
-                    title = filmType.getString("title");
-                    year = filmType.getString("year");
-                }
-                catch (Exception e)
+                catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
-                //to move onto next item
-                i++;
             }
-            if(title !=null && year !=null)
-            {
-                nTitleText.setText(title);
-                nYearText.setText(year);
-                nFilmInput.setText("");
-            }
-            else
-            {
-                nTitleText.setText(R.string.no_results);
-                nYearText.setText("");
-            }
+            return films;
         }
-        catch (Exception e)
-        {
-            nTitleText.setText(R.string.no_results);
-            nYearText.setText("");
-            e.printStackTrace();
-        }
-        super.onPostExecute(s);
-    }
-
-}*/
-
+}

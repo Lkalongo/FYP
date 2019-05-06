@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 public class searchActivity extends AppCompatActivity
 {
-    Button click;
-    public static TextView data;
+    //Button click;
+   // public static TextView data;
 
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -36,6 +37,6 @@ public class searchActivity extends AppCompatActivity
                 process.execute();
             }
         });
-    }
+    }*/
 }
 
