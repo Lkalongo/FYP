@@ -24,16 +24,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class watching extends AppCompatActivity {
-    public static TextView data;
+public class watching extends AppCompatActivity
+{
+   // public static TextView data;
     private static final String TAG = watching.class.getSimpleName();
+    private EditText nFilmInput;
+    private TextView nYearText, nTitleText;
 
-    ArrayList<Film> filmArrayList = new ArrayList<>();
+    //ArrayList<Film> filmArrayList = new ArrayList<>();
 
     //  ListView listView = findViewById(R.id.wListView);
     //listView.setAdapter(adapter);
 
-    // ArrayAdapter<String> adapter =
+    ArrayAdapter<String> adapter;
     //new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 
     //ListView listView = (ListView) findViewById(R.id.wListView);
@@ -48,12 +51,16 @@ public class watching extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        nFilmInput = (EditText) findViewById(R.id.filmInput);
+        nYearText = (TextView) findViewById(R.id.yearText);
+        nTitleText = (TextView) findViewById(R.id.titleText) ;
+
 
         //ListView adapter - 3/5
         ArrayList<Film> arrayOfFilms = new ArrayList<Film>();
         FilmsAdapter fAdapter = new FilmsAdapter(this, arrayOfFilms);
-
-        ListView listView = findViewById(R.id.wListView);
+        ArrayAdapter<String>
+        //ListView listView = findViewById(R.id.wListView);
         //listView.setAdapter(adapter);
 
         //data = (TextView)findViewById(R.id.oldListView);
@@ -85,6 +92,20 @@ public class watching extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void searchFilms (View view)
+    {
+        String queryString = nFilmInput.getText().toString();
+        Log.i(TAG, "searchFilms:" +queryString);
+        if(queryString.length() !=0)
+        {
+            new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
+        }
+        else
+        {
+            Toast.makeText(this, "Please enter a search term.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

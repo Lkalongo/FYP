@@ -1,16 +1,12 @@
-
 package com.example.lorraine.fyp;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -19,14 +15,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class FetchFilm extends AsyncTask<String, Void, String>
 {
-    String data = "";
-    ArrayList<String> filmArrayList = new ArrayList<String>();
+    private EditText nFilmInput;
+    private TextView nTitleText;
+    private TextView nYearText;
 
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
+
+    public FetchFilm(TextView yearText, TextView titleText, EditText filmInput)
+    {
+        this.nFilmInput = filmInput;
+        this.nTitleText = titleText;
+        this.nYearText = yearText;
+    }
+
 
     @Override
     protected String doInBackground(String ...params)
@@ -34,12 +38,9 @@ public class FetchFilm extends AsyncTask<String, Void, String>
         //search string
         String queryString = params[0];
 
-
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-
-        //contains JSON response as string
-       String filmJSONString = "";
+        String filmJSONString = null;
 
         try
         {
@@ -62,23 +63,21 @@ public class FetchFilm extends AsyncTask<String, Void, String>
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            //for converting inputstream to string
             InputStream inputStream = urlConnection.getInputStream();
             StringBuilder builder = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line = "";
+            String line;
             while((line = reader.readLine())!=null)
             {
                 builder.append(line + "\n");
-                data = data + line;
             }
             if(builder.length() == 0)
             {
                 return null;
             }
             filmJSONString = builder.toString();
-            //getFilmDataFromJSON(filmJSONString);
+            Log.i(LOG_TAG, "here11");
         }
         catch (IOException e)
         {
@@ -102,35 +101,81 @@ public class FetchFilm extends AsyncTask<String, Void, String>
                 }
             }
         }
-        Log.i(LOG_TAG, "doInBackground: filmJSONString: " + filmJSONString);
         return filmJSONString;
     }
 
+    //@params
+
+    @Override
     protected void onPostExecute(String s)
-            //(Void aVoid)
     {
         super.onPostExecute(s);
-        //super.onPostExecute(aVoid);
-        watching.data.setText(this.data);
-
-        // Factory method to convert an array of JSON objects into a list of objects
-        // Film.fromJson(jsonArray);
-    }
-
-    public static ArrayList<Film> fromJson(JSONArray jsonObjects)
-    {
-        ArrayList<Film> films = new ArrayList<Film>();
-        for (int i = 0; i < jsonObjects.length(); i++)
+        //searchActivity.data.setText(this.data);
+        try
         {
-            try
+            s = s.substring(s.indexOf("["));
+
+           JSONObject object = new JSONObject(s);
+           JSONArray jsonA = object.getJSONArray("Film");
+           Log.i(LOG_TAG, "here2" + s);
+
+            //gets indiviual films
+            for (int i = 0; i < jsonA.length(); i++)
             {
-                films.add(new Film(jsonObjects.getJSONObject(i)));
+                JSONObject data = jsonA.getJSONObject(i);
+               // Log.i(LOG_TAG, "here22" + data);
+               // Log.i(LOG_TAG, "here3" + jsonA);
+
+                Sti
+
+                /*Film films = new Film();
+                //get json object values from json array
+                films.setTitle(data.getString("Title"));
+                films.setYear(data.getString("Year"));
+                films.setType(data.getString("Type"));
+                films.setPoster(data.getString("Poster"));*/
+
+
+
+            }
+            /*while(j<itemsArray.length() || (year == null && title == null))
+            {
+                JSONObject film = itemsArray.getJSONObject(i);
+                JSONObject filmType = film.getJSONObject("filmType");
+
+                try
+                {
+                    title = filmType.getString("title");
+                    year = filmType.getString("year");
                 }
-                catch (JSONException e)
+                catch (Exception e)
                 {
                     e.printStackTrace();
                 }
+                //to move onto next item
+                i++;
             }
-            return films;
+            if(title !=null && year !=null)
+            {
+                nTitleText.setText(title);
+                nYearText.setText(year);
+                nFilmInput.setText("");
+            }
+            else
+            {
+                nTitleText.setText(R.string.no_results);
+                nYearText.setText("");
+            }
+            */
         }
+        catch (Exception e)
+        {
+           // nTitleText.setText(R.string.no_results);
+           // nYearText.setText("");
+            e.printStackTrace();
+        }
+
+        //super.onPostExecute(s);
+
+    }
 }

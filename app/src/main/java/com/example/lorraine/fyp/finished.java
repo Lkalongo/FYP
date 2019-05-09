@@ -70,7 +70,7 @@ public class finished extends AppCompatActivity
         arrayFilm.addAll(Arrays.asList(getResources().getStringArray(R.array.array_film)));
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayFilm);
         lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new ArrayView);
+        //lv.setOnItemClickListener(new ArrayView);
     }
 
 

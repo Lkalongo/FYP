@@ -7,55 +7,33 @@
     android:orientation="vertical"
     tools:context=".watching"
     tools:showIn="@layout/activity_watching">
-<!--
 
-    <TextView
+
+  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/yearText"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/titleText"
+        android:id="@+id/title"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
-
     <TextView
-        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Blah blah"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
--->
+        android:id="@+id/year"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
-    <Button
-        android:id="@+id/Search"
-        android:layout_width="88dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="106dp"
-        android:layout_marginEnd="321dp"
-        android:text="Search" />
+        android:id="@+id/type"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
-  <!--  <ListView
-        android:id="@+id/oldListView"
-        android:layout_width="match_parent"
-        android:layout_height="554dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="149dp" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/poster"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
 
-    <ListView
-        android:id="@+id/wListView"
-        android:layout_width="match_parent"
-        android:layout_height="554dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="149dp" />
 
     <EditText
         android:id="@+id/filmInput"
@@ -63,6 +41,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:inputType="text" />
+
+    <Button
+        android:id="@+id/Search"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="323dp"
+        android:onClick="searchFilms"
+        android:text="Search" />
+
 
 
 </RelativeLayout>
