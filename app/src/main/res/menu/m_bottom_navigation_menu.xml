@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_fetch_film"
+        android:enabled="true"
+        android:icon="@drawable/ic_movie_black_24dp"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/white"/>
+    <item
         android:id="@+id/action_watchlist"
         android:enabled="true"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"
@@ -23,5 +30,6 @@
         android:title="Finished"
         app:showAsAction="ifRoom"
         android:iconTint="@color/white"/>
+
 
 </menu>

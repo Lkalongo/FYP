@@ -10,71 +10,52 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.example.lorraine.fyp.Film;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FilmsAdapter extends ArrayAdapter<Film>
 {
-    private ArrayList<Film> filmList;
-    private LayoutInflater vi;
-    private int Resource;
-    private ViewHolder holder;
-    View view;
-    //ArrayList<Film> cp=0
-    int gen=0;
-    private static String LOG_TAG = FilmsAdapter.class.getSimpleName();
+    private static final String KEY_TITLE = "Title: ";
+    private static final String KEY_YEAR = "Year: ";
+    private static final String KEY_TYPE = "Type: ";
+    private static final String KEY_POSTER = "Poster: ";
+    private List<Film> dataSet;
 
-    FilmsAdapter(Context context,int resource, ArrayList<Film> objects)
+    public FilmsAdapter(List<Film> dataSet, Context mContext)
     {
-        super(context, resource, objects);
-        vi = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        Resource = resource;
-        this.filmList = objects;
-        Log.i(LOG_TAG,"film list and objects" + filmList);
+        super(mContext, R.layout.content_watching, dataSet);
+        this.dataSet = dataSet;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent)
-    {
-        View f = convertView;
-        //Film film = getItem(position);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v = convertView;
+        if (v == null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.content_watching, null);
+        }
+        Film film = dataSet.get(position);
+        if (film != null) {
+            //Text View references
+            TextView title = (TextView) v.findViewById(R.id.title);
+            TextView year = (TextView) v.findViewById(R.id.year);
+            TextView type = (TextView) v.findViewById(R.id.type);
+            TextView poster = (TextView) v.findViewById(R.id.poster);
 
-        if (f == null) {
-            holder = new ViewHolder();
-            f = vi.inflate(Resource, null);
-            Log.i(LOG_TAG, "here95" + f);
-            // convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_watching, parent, false);
 
-            holder.filmInput = (EditText) convertView.findViewById(R.id.filmInput);
-            holder.titleT = (TextView) convertView.findViewById(R.id.title);
-            holder.yearT = (TextView) convertView.findViewById(R.id.year);
-            holder.posterT = (TextView) convertView.findViewById(R.id.poster);
-            f.setTag(holder);
+            //Updating the text views
+            title.setText((KEY_TITLE + film.getTitle()));
+            year.setText((KEY_YEAR + film.getYear()));
+            type.setText((KEY_TYPE + film.getType()));
+            poster.setText((KEY_POSTER + film.getPoster()));
 
         }
-        else
-            {
-            holder = (ViewHolder) view.getTag();
-        }
 
-        holder.filmInput.setText(filmList.get(position).getFilmInput());
-        holder.titleT.setText(filmList.get(position).getTitle());
-        holder.yearT.setText(filmList.get(position).getYear());
-        holder.posterT.setText(filmList.get(position).getPoster());
-
-        return f;
-        //Log.i(LOG_TAG, "film adapter" + f);
-    }
-
-
-    private static class ViewHolder
-    {
-        EditText filmInput;
-        TextView titleT;
-        TextView yearT;
-        TextView posterT;
+        return v;
     }
 }
 

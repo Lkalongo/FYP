@@ -51,6 +51,11 @@ public class watchlist extends AppCompatActivity
                         Intent intent2 = new Intent(watchlist.this, finished.class);
                         startActivity(intent2);
                         break;
+                    case R.id.action_fetch_film:
+                        Toast.makeText(watchlist.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(watchlist.this, FetchFilm.class);
+                        startActivity(intent3);
+                        break;
                 }
                 return false;
             }

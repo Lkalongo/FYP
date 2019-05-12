@@ -7,6 +7,17 @@ public class Film
     String year;
     String type;
     String poster;
+    String filmInput;
+
+    public String getFilmInput() {
+        return filmInput;
+    }
+
+    public void setFilmInput(String filmInput) {
+        this.filmInput = filmInput;
+    }
+
+
 
 
     public void setPoster(String poster) {

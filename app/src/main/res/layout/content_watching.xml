@@ -33,8 +33,6 @@
         android:id="@+id/poster"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
-
-
     <EditText
         android:id="@+id/filmInput"
         android:layout_width="match_parent"

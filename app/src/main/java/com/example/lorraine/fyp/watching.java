@@ -4,43 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class watching extends AppCompatActivity
 {
    // public static TextView data;
     private static final String TAG = watching.class.getSimpleName();
-    private EditText nFilmInput;
-    private TextView nYearText, nTitleText;
+    private EditText filmInput;
+    private TextView yearT, titleT, posterT;
+   // public ListView filmJSONString;
 
-    //ArrayList<Film> filmArrayList = new ArrayList<>();
-
-    //  ListView listView = findViewById(R.id.wListView);
-    //listView.setAdapter(adapter);
-
-    ArrayAdapter<String> adapter;
-    //new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-
-    //ListView listView = (ListView) findViewById(R.id.wListView);
-    //  listView.setAdapter(adapter);
+    private List<Film> filmList;
+    private ListView flm;
+   // ArrayList<Film> filmList;
+   // FilmsAdapter adapter;
 
 
     @Override
@@ -51,19 +38,10 @@ public class watching extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        nFilmInput = (EditText) findViewById(R.id.filmInput);
-        nYearText = (TextView) findViewById(R.id.yearText);
-        nTitleText = (TextView) findViewById(R.id.titleText) ;
 
+        flm = (ListView) findViewById(R.id.list_film);
 
-        //ListView adapter - 3/5
-        ArrayList<Film> arrayOfFilms = new ArrayList<Film>();
-        FilmsAdapter fAdapter = new FilmsAdapter(this, arrayOfFilms);
-        ArrayAdapter<String>
-        //ListView listView = findViewById(R.id.wListView);
-        //listView.setAdapter(adapter);
-
-        //data = (TextView)findViewById(R.id.oldListView);
+      // filmJSONString = (ListView) findViewById(R.id.list_film);
 
 
         //bottom navigation - go in a its own class
@@ -87,25 +65,39 @@ public class watching extends AppCompatActivity
                         Intent intent2 = new Intent(watching.this, finished.class);
                         startActivity(intent2);
                         break;
+                    case R.id.action_fetch_film:
+                        Toast.makeText(watching.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(watching.this, FetchFilm.class);
+                        startActivity(intent3);
+                        break;
                 }
                 return false;
             }
         });
 
+        /*adapter = new FilmsAdapter(filmList, getApplicationContext());
+        adapter = new FilmsAdapter<String>(this, android.R.id.simple_list_item_1, )
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmList);
+        listView.setAdapter(adapter);*/
+
     }
 
     public void searchFilms (View view)
     {
-        String queryString = nFilmInput.getText().toString();
+        String queryString = filmInput.getText().toString();
+        //returns the string of the film searched for
         Log.i(TAG, "searchFilms:" +queryString);
         if(queryString.length() !=0)
         {
-            new FetchFilm(nYearText, nTitleText, nFilmInput).execute(queryString);
+            //new FetchFilm(yearT, titleT, filmInput).execute(queryString);
         }
         else
         {
             Toast.makeText(this, "Please enter a search term.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }
 

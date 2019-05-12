@@ -3,47 +3,51 @@ package com.example.lorraine.fyp;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.lorraine.fyp.FilmsAdapter;
+import com.example.lorraine.fyp.Film;
 
 public class FetchFilm extends AsyncTask<String, Void, String>
 {
-    private EditText nFilmInput;
-    private TextView nTitleText;
-    private TextView nYearText;
+    private static final String KEY_TITLE = "Title: ";
+    private static final String KEY_YEAR = "Year: ";
+    private static final String KEY_TYPE = "Type: ";
+    private static final String KEY_POSTER = "Poster: ";
+    private static final String KEY_DATA = "data ";
+    private FilmsAdapter adapter;
+   // private ListView listView;
+   // ArrayList<Film> filmList;
+   // FilmsAdapter adapter;
 
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
+    String filmJSONString = null;
 
-    public FetchFilm(TextView yearText, TextView titleText, EditText filmInput)
-    {
-        this.nFilmInput = filmInput;
-        this.nTitleText = titleText;
-        this.nYearText = yearText;
-    }
 
 
     @Override
-    protected String doInBackground(String ...params)
-    {
+    protected String doInBackground(String... params)
+        {
         //search string
         String queryString = params[0];
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        String filmJSONString = null;
+        // String filmJSONString = null;
 
-        try
-        {
+        try {
             final String OMDB_BASE_URL = "http://www.omdbapi.com/?";
             final String QUERY_PARAM = "s";
             final String API_KEY = "822594fa";
@@ -68,35 +72,32 @@ public class FetchFilm extends AsyncTask<String, Void, String>
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String line;
-            while((line = reader.readLine())!=null)
-            {
+            while ((line = reader.readLine()) != null) {
                 builder.append(line + "\n");
             }
-            if(builder.length() == 0)
-            {
+            if (builder.length() == 0) {
                 return null;
             }
             filmJSONString = builder.toString();
             Log.i(LOG_TAG, "here11");
+
+
+                       //return the list
+            //return filmJSONString;
+
         }
         catch (IOException e)
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            if(urlConnection !=null)
-            {
+
+        } finally {
+            if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if(reader !=null)
-            {
-                try
-                {
+            if (reader != null) {
+                try {
                     reader.close();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -110,72 +111,46 @@ public class FetchFilm extends AsyncTask<String, Void, String>
     protected void onPostExecute(String s)
     {
         super.onPostExecute(s);
-        //searchActivity.data.setText(this.data);
+
+        // watching.filmJSONString.setText(this.filmJSONString);
+      // ListView listView = (ListView)findViewById(R.id.list_film);
+
         try
         {
-            s = s.substring(s.indexOf("["));
+            filmJSONString = filmJSONString.substring(filmJSONString.indexOf("["));
 
-           JSONObject object = new JSONObject(s);
-           JSONArray jsonA = object.getJSONArray("Film");
-           Log.i(LOG_TAG, "here2" + s);
+
+            JSONArray jsonA = new JSONArray(filmJSONString);
+            //List filmList = new ArrayList<>();
+            List<Film> filmList = new ArrayList<>();
+            Log.i(LOG_TAG, "here2" + filmJSONString);
 
             //gets indiviual films
             for (int i = 0; i < jsonA.length(); i++)
             {
+                Film flmDetails = new Film();
                 JSONObject data = jsonA.getJSONObject(i);
-               // Log.i(LOG_TAG, "here22" + data);
-               // Log.i(LOG_TAG, "here3" + jsonA);
+                Log.i(LOG_TAG, "here22" + data);
+                Log.i(LOG_TAG, "here3" + jsonA);
 
-                Sti
-
-                /*Film films = new Film();
-                //get json object values from json array
-                films.setTitle(data.getString("Title"));
-                films.setYear(data.getString("Year"));
-                films.setType(data.getString("Type"));
-                films.setPoster(data.getString("Poster"));*/
-
-
-
+                flmDetails.setTitle(data.getString(KEY_TITLE));
+                flmDetails.setYear(data.getString(KEY_YEAR));
+                flmDetails.setType(data.getString(KEY_TYPE));
+                flmDetails.setPoster(data.getString(KEY_POSTER));
+                filmList.add(flmDetails);
             }
-            /*while(j<itemsArray.length() || (year == null && title == null))
-            {
-                JSONObject film = itemsArray.getJSONObject(i);
-                JSONObject filmType = film.getJSONObject("filmType");
-
-                try
-                {
-                    title = filmType.getString("title");
-                    year = filmType.getString("year");
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-                //to move onto next item
-                i++;
-            }
-            if(title !=null && year !=null)
-            {
-                nTitleText.setText(title);
-                nYearText.setText(year);
-                nFilmInput.setText("");
-            }
-            else
-            {
-                nTitleText.setText(R.string.no_results);
-                nYearText.setText("");
-            }
-            */
+            //adapter = new FilmsAdapter(filmList, getApplicationContext());
+            //adapter = new FilmsAdapter<String>(this, android.R.id.simple_list_item_1, )
+            //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmList);
+           // listView.setAdapter(adapter);
+           // return ;
+           // Log.i(LOG_TAG,"first: film details" + flmDetails);
+            Log.i(LOG_TAG,"first: film list" + filmList);
         }
-        catch (Exception e)
+        catch (JSONException e)
         {
-           // nTitleText.setText(R.string.no_results);
-           // nYearText.setText("");
             e.printStackTrace();
         }
-
-        //super.onPostExecute(s);
 
     }
 }

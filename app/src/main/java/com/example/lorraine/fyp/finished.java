@@ -59,6 +59,11 @@ public class finished extends AppCompatActivity
                         Intent intent2 = new Intent(finished.this, finished.class);
                         startActivity(intent2);
                         break;
+                    case R.id.action_fetch_film:
+                        Toast.makeText(finished.this, "Finished", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(finished.this, FetchFilm.class);
+                        startActivity(intent3);
+                        break;
                 }
                 return false;
             }

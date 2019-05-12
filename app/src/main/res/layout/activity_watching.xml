@@ -38,6 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list_film"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="150dp"
+        android:divider="@color/grey"
+        android:dividerHeight="5dp">
+    </ListView>
 
 </android.support.design.widget.CoordinatorLayout>
