@@ -3,8 +3,11 @@ package com.example.lorraine.fyp;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,18 +25,36 @@ import com.example.lorraine.fyp.Film;
 
 public class FetchFilm extends AsyncTask<String, Void, String>
 {
-    private static final String KEY_TITLE = "Title: ";
+  /*  private static final String KEY_TITLE = "Title: ";
     private static final String KEY_YEAR = "Year: ";
     private static final String KEY_TYPE = "Type: ";
     private static final String KEY_POSTER = "Poster: ";
-    private static final String KEY_DATA = "data ";
-    private FilmsAdapter adapter;
+    private static final String KEY_DATA = "data ";*/
+    private FilmsAdapter adapterF;
+    private ListView lVFilms;
+
+    private EditText filmInput;
+    private TextView title;
+    private TextView year;
+    private TextView type;
+    private TextView poster;
    // private ListView listView;
    // ArrayList<Film> filmList;
    // FilmsAdapter adapter;
 
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
-    String filmJSONString = null;
+
+
+
+    public FetchFilm(TextView year, TextView title, TextView type, TextView poster, EditText filmInput)
+    {
+        this.filmInput = filmInput;
+        this.title = title;
+        this.year = year;
+        this.type = type;
+        this.poster = poster;
+    }
+    //String filmJSONString = null;
 
 
 
@@ -45,7 +66,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        // String filmJSONString = null;
+        String filmJSONString = null;
 
         try {
             final String OMDB_BASE_URL = "http://www.omdbapi.com/?";
@@ -110,42 +131,42 @@ public class FetchFilm extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String s)
     {
-        super.onPostExecute(s);
+        //super.onPostExecute(s);
 
         // watching.filmJSONString.setText(this.filmJSONString);
-      // ListView listView = (ListView)findViewById(R.id.list_film);
-
+      // ListView listView = (ListView)findViewById(R.id.filmList);
+        List<Film> filmList = new ArrayList<>();
         try
         {
-            filmJSONString = filmJSONString.substring(filmJSONString.indexOf("["));
+            //filmJSONString = filmJSONString.substring(filmJSONString.indexOf("["));
+            s = s.substring(s.indexOf("["));
 
-
-            JSONArray jsonA = new JSONArray(filmJSONString);
+            JSONArray jsonA = new JSONArray(s);
             //List filmList = new ArrayList<>();
-            List<Film> filmList = new ArrayList<>();
-            Log.i(LOG_TAG, "here2" + filmJSONString);
+           // List<Film> filmList = new ArrayList<>();
+            Log.i(LOG_TAG, "here2" + s);
 
             //gets indiviual films
             for (int i = 0; i < jsonA.length(); i++)
             {
-                Film flmDetails = new Film();
                 JSONObject data = jsonA.getJSONObject(i);
-                Log.i(LOG_TAG, "here22" + data);
-                Log.i(LOG_TAG, "here3" + jsonA);
+                Film flmDetails = new Film();
 
-                flmDetails.setTitle(data.getString(KEY_TITLE));
-                flmDetails.setYear(data.getString(KEY_YEAR));
-                flmDetails.setType(data.getString(KEY_TYPE));
-                flmDetails.setPoster(data.getString(KEY_POSTER));
+                Log.i(LOG_TAG, "here22" + data);
+                //Log.i(LOG_TAG, "here3" + jsonA);
+
+                flmDetails.setTitle(data.getString("Title"));
+                flmDetails.setYear(data.getString("Year"));
+                flmDetails.setType(data.getString("Type"));
+                flmDetails.setPoster(data.getString("Poster"));
                 filmList.add(flmDetails);
+
+                Log.i(LOG_TAG, "end of fetchfilm" + flmDetails);
             }
-            //adapter = new FilmsAdapter(filmList, getApplicationContext());
-            //adapter = new FilmsAdapter<String>(this, android.R.id.simple_list_item_1, )
-            //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filmList);
-           // listView.setAdapter(adapter);
-           // return ;
-           // Log.i(LOG_TAG,"first: film details" + flmDetails);
-            Log.i(LOG_TAG,"first: film list" + filmList);
+           /* lvFilms = (ListView)findViewById(R.id.list_film);
+            adapterF = new FilmsAdapter(getClass() ,0, filmList);
+            lvFilms.setAdapter(adapterF);
+            lVFilms.setLayoutManger(new RelativeLayoutManager(MainActivity.this));*/
         }
         catch (JSONException e)
         {

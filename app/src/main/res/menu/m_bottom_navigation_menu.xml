@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_fetch_film"
+        android:id="@+id/action_mainactivity"
         android:enabled="true"
         android:icon="@drawable/ic_movie_black_24dp"
         android:title="Search"

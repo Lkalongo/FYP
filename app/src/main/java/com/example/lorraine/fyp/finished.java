@@ -44,6 +44,11 @@ public class finished extends AppCompatActivity
            {
                 switch (item.getItemId())
                 {
+                    case R.id.action_mainactivity:
+                        Toast.makeText(finished.this, "Search", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(finished.this, MainActivity.class);
+                        startActivity(intent3);
+                        break;
                     case R.id.action_watchlist:
                         Toast.makeText(finished.this, "Watchlist", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(finished.this, watchlist.class);
@@ -59,11 +64,7 @@ public class finished extends AppCompatActivity
                         Intent intent2 = new Intent(finished.this, finished.class);
                         startActivity(intent2);
                         break;
-                    case R.id.action_fetch_film:
-                        Toast.makeText(finished.this, "Finished", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = new Intent(finished.this, FetchFilm.class);
-                        startActivity(intent3);
-                        break;
+
                 }
                 return false;
             }

@@ -17,9 +17,6 @@ public class Film
         this.filmInput = filmInput;
     }
 
-
-
-
     public void setPoster(String poster) {
         this.poster = poster;
     }

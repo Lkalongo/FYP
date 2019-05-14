@@ -36,6 +36,11 @@ public class watchlist extends AppCompatActivity
             {
                 switch (item.getItemId())
                 {
+                    case R.id.action_mainactivity:
+                        Toast.makeText(watchlist.this, "Search", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(watchlist.this, MainActivity.class);
+                        startActivity(intent3);
+                        break;
                     case R.id.action_watchlist:
                         Toast.makeText(watchlist.this, "Watchlist", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(watchlist.this, watchlist.class);
@@ -51,11 +56,7 @@ public class watchlist extends AppCompatActivity
                         Intent intent2 = new Intent(watchlist.this, finished.class);
                         startActivity(intent2);
                         break;
-                    case R.id.action_fetch_film:
-                        Toast.makeText(watchlist.this, "Finished", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = new Intent(watchlist.this, FetchFilm.class);
-                        startActivity(intent3);
-                        break;
+
                 }
                 return false;
             }

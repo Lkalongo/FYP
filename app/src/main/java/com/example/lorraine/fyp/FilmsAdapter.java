@@ -18,27 +18,35 @@ import java.util.List;
 
 public class FilmsAdapter extends ArrayAdapter<Film>
 {
-    private static final String KEY_TITLE = "Title: ";
-    private static final String KEY_YEAR = "Year: ";
-    private static final String KEY_TYPE = "Type: ";
-    private static final String KEY_POSTER = "Poster: ";
-    private List<Film> dataSet;
+   /* private EditText filmInput;
+    private TextView title;
+    private TextView year;
+    private TextView type;
+    private TextView poster;*/
+    List<Film> filmList;
+    Film current;
+    int currentPos = 0;
+    private LayoutInflater inflater;
 
-    public FilmsAdapter(List<Film> dataSet, Context mContext)
+    public FilmsAdapter(Context context, int resource ,List<Film> filmList)
     {
-        super(mContext, R.layout.content_watching, dataSet);
-        this.dataSet = dataSet;
+        super(context, resource, filmList);
+        //this.context = context;
+        //inflater = LayoutInflater.from(context);
+      //  super(fetchFilm, R.layout.content_main, filmList);
+        this.filmList = filmList;
     }
+
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.content_watching, null);
+            inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.content_main, null);
         }
-        Film film = dataSet.get(position);
+        Film film = filmList.get(position);
         if (film != null) {
             //Text View references
             TextView title = (TextView) v.findViewById(R.id.title);
@@ -48,14 +56,15 @@ public class FilmsAdapter extends ArrayAdapter<Film>
 
 
             //Updating the text views
-            title.setText((KEY_TITLE + film.getTitle()));
-            year.setText((KEY_YEAR + film.getYear()));
-            type.setText((KEY_TYPE + film.getType()));
-            poster.setText((KEY_POSTER + film.getPoster()));
+            title.setText(("Title" + film.getTitle()));
+            year.setText(("Year" + film.getYear()));
+            type.setText(("Type" + film.getType()));
+            poster.setText(("Poster" + film.getPoster()));
 
         }
 
         return v;
     }
+
 }
 
