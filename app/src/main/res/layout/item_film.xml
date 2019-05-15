@@ -4,23 +4,23 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/fName"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name" />
     <TextView
-        android:id="@+id/fYear"
+        android:id="@+id/year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Year" />
 
     <TextView
-        android:id="@+id/fType"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Type" />
     <TextView
-        android:id="@+id/fPoster"
+        android:id="@+id/poster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Poster" />

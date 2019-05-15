@@ -15,16 +15,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class watching extends AppCompatActivity
 {
-   // public static TextView data;
     private static final String LOG_TAG = watching.class.getSimpleName();
     private EditText filmInput;
     private TextView year, title, poster,type;
-   // public ListView filmJSONString;
-   private List<Film> filmList;
+    private List<Film> filmList;
     private ListView lvFilms;
 
     FilmsAdapter adapterF;
@@ -38,8 +39,14 @@ public class watching extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        title = (TextView)findViewById(R.id.title);
+        year = (TextView)findViewById(R.id.year);
+        poster = (TextView)findViewById(R.id.poster);
+        type = (TextView)findViewById(R.id.type);
+
       // filmJSONString = (ListView) findViewById(R.id.list_film);
 
+        //calling film FetchFilm class and the adapter array
        /* adapterF = new FilmsAdapter(this ,0, filmList);
         lvFilms.setAdapter(adapterF);
        // lVFilms.setLayoutManger(new LayoutManager(watching.this));*/
@@ -77,6 +84,7 @@ public class watching extends AppCompatActivity
             }
         });
 
+
     }
 
     public void searchFilms (View view)
@@ -88,10 +96,13 @@ public class watching extends AppCompatActivity
         if(queryString.length() !=0)
         {
            //new FetchFilm().execute(queryString);
-            new FetchFilm(TextView title, TextView year, TextView poster, EditText filmInput).execute(queryString);
+            new FetchFilm(title, year,  poster).execute(queryString);
+
+
             lvFilms = (ListView)findViewById(R.id.list_film);
-            adapterF = new FilmsAdapter(this ,0, filmList);
+            adapterF = new FilmsAdapter(this ,android.R.layout.simple_list_item_1, filmList);
             lvFilms.setAdapter(adapterF);
+
         }
         else
         {

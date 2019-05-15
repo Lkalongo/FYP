@@ -25,11 +25,6 @@ import com.example.lorraine.fyp.Film;
 
 public class FetchFilm extends AsyncTask<String, Void, String>
 {
-  /*  private static final String KEY_TITLE = "Title: ";
-    private static final String KEY_YEAR = "Year: ";
-    private static final String KEY_TYPE = "Type: ";
-    private static final String KEY_POSTER = "Poster: ";
-    private static final String KEY_DATA = "data ";*/
     private FilmsAdapter adapterF;
     private ListView lVFilms;
 
@@ -45,10 +40,9 @@ public class FetchFilm extends AsyncTask<String, Void, String>
     private static final String LOG_TAG = FetchFilm.class.getSimpleName();
 
 
-
-    public FetchFilm(TextView year, TextView title, TextView type, TextView poster, EditText filmInput)
+    public FetchFilm(TextView title, TextView year, TextView poster)
     {
-        this.filmInput = filmInput;
+
         this.title = title;
         this.year = year;
         this.type = type;
@@ -131,7 +125,7 @@ public class FetchFilm extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String s)
     {
-        //super.onPostExecute(s);
+        super.onPostExecute(s);
 
         // watching.filmJSONString.setText(this.filmJSONString);
       // ListView listView = (ListView)findViewById(R.id.filmList);
@@ -160,13 +154,10 @@ public class FetchFilm extends AsyncTask<String, Void, String>
                 flmDetails.setType(data.getString("Type"));
                 flmDetails.setPoster(data.getString("Poster"));
                 filmList.add(flmDetails);
+                return;
 
-                Log.i(LOG_TAG, "end of fetchfilm" + flmDetails);
+                //Log.i(LOG_TAG, "end of fetchfilm" + flmDetails);
             }
-           /* lvFilms = (ListView)findViewById(R.id.list_film);
-            adapterF = new FilmsAdapter(getClass() ,0, filmList);
-            lvFilms.setAdapter(adapterF);
-            lVFilms.setLayoutManger(new RelativeLayoutManager(MainActivity.this));*/
         }
         catch (JSONException e)
         {

@@ -6,18 +6,23 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class watchlist extends AppCompatActivity
 {
+    ArrayAdapter<String> adapter;
 
-    private Button watchlist;
-    private Button finished;
-    private Button watching;
-    private Button settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,7 +67,39 @@ public class watchlist extends AppCompatActivity
             }
         });
 
+
+        ListView lv = (ListView) findViewById(R.id.listViewFilm);
+        ArrayList<String> arrayFilm = new ArrayList<>();
+        arrayFilm.addAll(Arrays.asList(getResources().getStringArray(R.array.array_film)));
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayFilm);
+        lv.setAdapter(adapter);
+        //lv.setOnItemClickListener(new ArrayView);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView)item.getActionView();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }
